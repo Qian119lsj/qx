@@ -11,7 +11,8 @@
 
 var modifiedHeaders = $request.headers;
 // $notify('title', 'subtitle', 'massage', 'buzhid');
-console.log(JSON.stringify(modifiedHeaders));
+console.log(modifiedHeaders['Host']);
+modifiedHeaders['Connection'] = null;
 modifiedHeaders['Proxy-Connection'] = 'Keep-Alive';
 modifiedHeaders['X-T5-Auth'] = '88888888';
 // var modifiedPath = '/api2/abc?k=v';
