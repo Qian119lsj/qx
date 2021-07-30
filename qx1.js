@@ -1,7 +1,5 @@
-Notify_Demo('================11');
 function Change_Request()
 {
-    Notify_Demo('================22');
     var RequestHeaders = $request.headers;
     delete RequestHeaders.Connection;
     RequestHeaders['Proxy-Connection'] = 'Keep-Alive';
@@ -9,13 +7,24 @@ function Change_Request()
     $done({RequestHeaders});//修改完成之后需要调用$done
 }
 
+//获取请求URL和请求头信息
+function Get_RequestInfo()
+{
+    var RequestURL,RequestHeaders;
+    RequestURL = $request.url;
+    RequestHeaders = $request.headers;
+    console.log(RequestURL);
+    console.log(RequestHeaders);
+}
+
 function Notify_Demo(ct)
 {
     var Title,SubTitle,Content;
     TItle = "qx1";
-    SubTitle  = "qx1";
+    SubTitle  = "qx";
     Content = ct;
     $notification.post(Title,SubTitle,Content);
 }
-
+Get_RequestInfo();
 Change_Request();
+Get_RequestInfo();
