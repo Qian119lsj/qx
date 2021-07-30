@@ -4,9 +4,9 @@ function Change_Request()
     delete RequestHeaders.Connection;
     RequestHeaders['Proxy-Connection'] = 'Keep-Alive';
     RequestHeaders['X-T5-Auth'] = '88888888';
-    Notify_Demo($request.headers)
+    Notify_Demo(json.stringify($request.headers))
     $done({headers:RequestHeaders});//修改完成之后需要调用$done
-    Notify_Demo($request.headers)
+    Notify_Demo(json.stringify($request.headers))
 }
 
 //获取请求URL和请求头信息
