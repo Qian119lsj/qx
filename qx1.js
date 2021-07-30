@@ -1,23 +1,33 @@
   
-/**
- * @fileoverview Example of HTTP rewrite of request header.
- *
- * @supported Quantumult X (v1.0.5-build188)
- *
- * [rewrite_local]
- * ^http://example\.com/resource9/ url script-request-header sample-rewrite-request-header.js
- */
+/*
+network-changed script-path=https://raw.githubusercontent.com/Loon0x00/LoonExampleConfig/master/Script/netChanged.js
+*/
 
-// $request.scheme, $request.method, $request.url, $request.path, $request.headers
+//获取Loon的相关配置，返回为json格式
+var confStr = $config.getConfig()
+console.log(confStr)
 
-var modifiedHeaders = $request.headers;
-// $notify('title', 'subtitle', 'massage', 'buzhid');
-console.log(modifiedHeaders['Host']);
-delete modifiedHeaders.Connection;
-modifiedHeaders['Proxy-Connection'] = 'Keep-Alive';
-modifiedHeaders['X-T5-Auth'] = '88888888';
-// var modifiedPath = '/api2/abc?k=v';
+var conf = JSON.parse(confStr)
+if (conf.ssid == "your ssid name") {
+    /*
+    设置全局运行模式
+    0:Global Direct
+    1:By Rule
+    2:Global Proxy
+    */
+    $config.setRunningModel(0)
+    //设置select策略组所对应的策略，子策略不存在时将保持原先的策略不变
+    $config.setSelectPolicy("⛔ 广告拦截","DIRECT")
+    $notification.post("Network changed","Change Running Model to Global Direct","⛔ 广告拦截 to DIRECT")
+} else {
+    $config.setRunningModel(1)
+    $config.setSelectPolicy("⛔ 广告拦截","REJECT")
+    $notification.post("Network changed","Change Running Model to Filter by rule","⛔ 广告拦截 to REJECT")
+}
 
-$done({headers : modifiedHeaders});
-// $done({path : modifiedPath});
-// $done({}); // Not changed.
+//一次性同时设置多个策略组的策略
+$config.setSelectPolicy(["国外网站","广告拦截","谷歌服务"],["HK Node 1","REJECT","节点选择"])
+
+//获取相关策略的子策略，json格式
+var subPolicys = $config.getSubPolicys("节点选项")
+console.log(subPolicys);
