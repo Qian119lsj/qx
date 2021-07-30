@@ -12,7 +12,7 @@
 var modifiedHeaders = $request.headers;
 // $notify('title', 'subtitle', 'massage', 'buzhid');
 console.log(modifiedHeaders['Host']);
-modifiedHeaders['Connection'] = null;
+delete modifiedHeaders.Connection;
 modifiedHeaders['Proxy-Connection'] = 'Keep-Alive';
 modifiedHeaders['X-T5-Auth'] = '88888888';
 // var modifiedPath = '/api2/abc?k=v';
