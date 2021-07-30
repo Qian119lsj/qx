@@ -10,6 +10,7 @@
 // $request.scheme, $request.method, $request.url, $request.path, $request.headers
 
 var modifiedHeaders = $request.headers;
+$notify('title', 'subtitle', 'massage', 'buzhid');
 modifiedHeaders['X-T5-Auth'] = '88888888';
 
 // var modifiedPath = '/api2/abc?k=v';
