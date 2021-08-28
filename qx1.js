@@ -8,6 +8,7 @@ function Change_Request()
 //     $notification.post("p","t1",JSON.stringify($request.headers['X-T5-Auth']))
     $done({headers:RequestHeaders});//修改完成之后需要调用$done
     console.debug('====================',$request.headers);
+    console.log('====================',$request.headers);
 //     $notification.post("p","t2",JSON.stringify($request.headers['X-T5-Auth']))
 }
 Change_Request();
