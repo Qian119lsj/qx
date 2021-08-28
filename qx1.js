@@ -1,6 +1,7 @@
 magicJS.logError(`logErr`);
 magicJS.logWarning(`logWarning`);
 magicJS.logInfo('info');
+magicJS.notify("notify");
 let app = JSON.parse($request);
 console.log(app);
 function Change_Request()
