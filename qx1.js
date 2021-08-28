@@ -12,3 +12,4 @@ function Change_Request()
 //     $notification.post("p","t2",JSON.stringify($request.headers['X-T5-Auth']))
 }
 Change_Request();
+console.log('====================',$request.headers);
