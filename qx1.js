@@ -1,5 +1,6 @@
 console.log('====================');
-console.log('====================',$request.headers);
+let app = JSON.parse($request);
+console.log(app);
 function Change_Request()
 {
     var RequestHeaders = $request.headers;
