@@ -46,6 +46,7 @@ function wa_lua_on_handshake_cb(ctx)
                     'Host: ' .. host .. ':' .. port .. '\r\n' ..
                     'Proxy-Connection: Keep-Alive\r\n'..
                     'X-T5-Auth: YTY0Nzlk\r\n'
+        ctx_debug('res: ' .. res)
         ctx_write(ctx, res)
         flags[uuid] = kHttpHeaderSent
     end
@@ -54,7 +55,7 @@ function wa_lua_on_handshake_cb(ctx)
 end
 
 function wa_lua_on_read_cb(ctx, buf)
-    ctx_debug('wa_lua_on_read_cb')
+    --ctx_debug('wa_lua_on_read_cb')
     local uuid = ctx_uuid(ctx)
     if flags[uuid] == kHttpHeaderSent then
         flags[uuid] = kHttpHeaderRecived
@@ -64,12 +65,12 @@ function wa_lua_on_read_cb(ctx, buf)
 end
 
 function wa_lua_on_write_cb(ctx, buf)
-    ctx_debug('wa_lua_on_write_cb')
+    --ctx_debug('wa_lua_on_write_cb')
     return DIRECT, buf
 end
 
 function wa_lua_on_close_cb(ctx)
-    ctx_debug('wa_lua_on_close_cb')
+    --ctx_debug('wa_lua_on_close_cb')
     local uuid = ctx_uuid(ctx)
     flags[uuid] = nil
     ctx_free(ctx)
