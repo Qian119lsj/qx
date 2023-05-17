@@ -45,10 +45,8 @@ function wa_lua_on_handshake_cb(ctx)
         local host = ctx_address_host(ctx)
         local port = ctx_address_port(ctx)
         local res = 'CONNECT ' .. host .. ':' .. port .. ' HTTP/1.1\r\n' ..
-                    'Host: ' .. host .. ':' .. port .. '\r\n' ..
                     'Host: 153.3.236.22\r\n'..
-                    'X-T5-Auth: 114514\r\n'..
-                    'User-Agent: baiduboxapp\r\n\r\n'
+                    'X-T5-Auth: 114514\r\n'
         ctx_write(ctx, res)
         flags[uuid] = kHttpHeaderSent
     end
