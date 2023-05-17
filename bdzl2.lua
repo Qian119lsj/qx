@@ -46,8 +46,7 @@ function wa_lua_on_handshake_cb(ctx)
         local port = ctx_address_port(ctx)
         local res = 'CONNECT ' .. host .. ':' .. port .. ' HTTP/1.1\r\n' ..
                     'Host: ' .. host .. ':' .. port .. '\r\n' ..
-                    'Proxy-Connection: Keep-Alive\r\n'..
-                    'X-T5-Auth: YTY0Nzlk1\r\n'
+                    'Proxy-Connection: Keep-Alive\r\n\r\n'
         ctx_write(ctx, res)
         flags[uuid] = kHttpHeaderSent
     end
