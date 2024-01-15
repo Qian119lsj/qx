@@ -1,0 +1,94 @@
+{
+  "log": {
+    "level": "debug",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "local",
+        "address": "223.5.5.5",
+        "detour": "direct"
+      },
+      {
+        "tag": "google",
+        "address": "tls://8.8.8.8"
+      },
+      {
+        "tag": "dns_block",
+        "address": "rcode://refused"
+      }
+    ],
+    "rules": [
+      {
+        "outbound": "any",
+        "server": "local"
+      },
+      {
+        "geosite": ["cn"],
+        "server": "local"
+      }
+    ]
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "inet4_address": "172.16.0.1/30",
+      "inet6_address": "fd00::1/126",
+      "mtu": 1400,
+      "auto_route": true,
+      "strict_route": true,
+      "stack": "system",
+      "sniff": true,
+      "sniff_override_destination": false
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "baidu",
+      "type": "http",
+      "server": "14.215.182.75",
+      "server_port": 443,
+      "headers": {
+        "Host":"153.3.236.22:443",
+        "X-T5-Auth":"683556433",
+        "User-Agent":"baiduboxapp"
+      }
+    }
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "protocol": "dns",
+        "outbound": "dns-out"
+      },
+      {
+        "protocol": ["quic", "stun"],
+        "outbound": "block"
+      },
+      {
+        "geosite": ["cn"],
+        "geoip": ["cn"],
+        "outbound": "baidu"
+      },
+      {
+        "geoip": ["private"],
+        "outbound": "direct"
+      }
+    ],
+    "auto_detect_interface": true
+  }
+}
