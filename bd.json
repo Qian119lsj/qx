@@ -31,10 +31,6 @@
       {
         "outbound": "any",
         "server": "local"
-      },
-      {
-        "geosite": ["cn"],
-        "server": "alidns"
       }
     ]
   },
@@ -93,13 +89,9 @@
       {
         "geoip": ["private"],
         "outbound": "direct"
-      },
-      {
-        "geosite": ["cn"],
-        "geoip": ["cn"],
-        "outbound": "baidu"
       }
     ],
+    "final": "baidu",
     "auto_detect_interface": true
   }
 }
